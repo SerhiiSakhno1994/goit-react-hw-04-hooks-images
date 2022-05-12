@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Notiflix from 'notiflix';
 
 import FetchPixabay from 'components/services/pixabayApi';
@@ -23,10 +23,6 @@ export default function ImageInfo() {
     // if (picturesName === '') {
     //   return;
     // }
-    fetchPicturesName();
-  }, [page, picturesName]);
-
-  const fetchPicturesName = () => {
     setIsLoader(true);
     FetchPixabay(picturesName, page).then(r => {
       if (r.totalHits === 0 && r.hits.length === 0) {
@@ -41,7 +37,24 @@ export default function ImageInfo() {
       setTotal(r.total);
       setIsLoader(false);
     });
-  };
+  }, [page, picturesName]);
+
+  // const fetchPicturesName = () => {
+  //   setIsLoader(true);
+  //   FetchPixabay(picturesName, page).then(r => {
+  //     if (r.totalHits === 0 && r.hits.length === 0) {
+  //       Notiflix.Report.failure(
+  //         'WARNING',
+  //         `Sorry, there is no image named ${picturesName}`,
+  //         'Close'
+  //       );
+  //     }
+
+  //     setHits(state => [...state, ...r.hits]);
+  //     setTotal(r.total);
+  //     setIsLoader(false);
+  //   });
+  // };
 
   const onSubmit = searchPicturesName => {
     setHits([]);
