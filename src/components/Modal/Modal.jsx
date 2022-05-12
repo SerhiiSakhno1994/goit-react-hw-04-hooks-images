@@ -14,7 +14,7 @@ export default function Modal({ children, onClose }) {
       console.log('Это функция очистки перед следующим вызовом useEffect');
       window.removeEventListener('keydown', handeleKeyDown);
     };
-  }, []);
+  });
 
   const handeleKeyDown = e => {
     if (e.code === 'Escape') {
